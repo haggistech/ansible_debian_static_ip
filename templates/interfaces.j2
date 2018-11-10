@@ -1,0 +1,14 @@
+# Log in as root or su to root then
+nano /etc/network/interfaces
+# Should look like this:
+source /etc/network/interfaces.d/*
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug {{ ansible_default_ipv4.interface }}
+iface {{ ansible_default_ipv4.interface }} inet static
+        address {{ static_ip }}
+        netmask {{ netmask }}
+        gateway [[ gateway ]]

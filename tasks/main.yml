@@ -1,0 +1,18 @@
+---
+# tasks file for set_static_ip
+  - name: Remove old interfaces file
+    shell rm -rf /etc/network/interfaces
+  
+  - name: add new interfaces file
+    template:
+      src: interfaces.j2
+      dest: "/etc/network/"
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Restart Networking
+    shell: service networking restart
+
+  - name: Make the Interface Up
+    shell: ifup {{ ansible_default_ipv4.interface }}
