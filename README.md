@@ -1,31 +1,38 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Sets a Static IP on the host. After this role is run a reboot is needed for the new settings to take effect
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+static_ip: "192.168.0.207" # IP You want the host to have
+netmask: "255.255.255.0" # Subnet You want the host to have
+gateway: "192.168.0.1" # Gateway IP You want the host to have
 
-Dependencies
-------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+---
+# This playbook deploys the whole application stack in this site.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+  - name: apply common configuration to all nodes
+    hosts: 127.0.0.1
+    connection: local
+    become: yes
+    become_user: root
+    become_method: su
+
+    roles:
+      - set_static_ip
+
 
 License
 -------
@@ -35,4 +42,5 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Michael McLean
+haggistech@gmail.com

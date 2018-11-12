@@ -1,12 +1,12 @@
 ---
 # tasks file for set_static_ip
   - name: Remove old interfaces file
-    shell rm -rf /etc/network/interfaces
+    shell: rm -rf /etc/network/interfaces
   
   - name: add new interfaces file
     template:
       src: interfaces.j2
-      dest: "/etc/network/"
+      dest: "/etc/network/interfaces"
       owner: root
       group: root
       mode: 0644

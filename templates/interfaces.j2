@@ -1,7 +1,8 @@
-# Log in as root or su to root then
-nano /etc/network/interfaces
-# Should look like this:
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
 source /etc/network/interfaces.d/*
+
 # The loopback network interface
 auto lo
 iface lo inet loopback
@@ -11,4 +12,4 @@ allow-hotplug {{ ansible_default_ipv4.interface }}
 iface {{ ansible_default_ipv4.interface }} inet static
         address {{ static_ip }}
         netmask {{ netmask }}
-        gateway [[ gateway ]]
+        gateway {{ gateway }}
